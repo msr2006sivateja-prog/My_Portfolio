@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Test User",
+    "email": "test@example.com",
+    "message": "Testing JSON persistence"
+  },
+  {
+    "id": 2,
+    "name": "siva",
+    "email": "siva123@gmail.com",
+    "message": "hello developer"
+  }
+]

@@ -1,4 +1,5 @@
 import {useState} from 'react'
+
 function ContactForm() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -11,6 +12,7 @@ function ContactForm() {
 
         setError('')
         setSuccess('')
+
         if(name === '' || email === '' || message === ''){
             setError('Please fill in all the fields')
             return
@@ -23,16 +25,43 @@ function ContactForm() {
             return
         }
 
-        setSuccess('Message Sent Successfully')
+        fetch('http://localhost:5000/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name,
+                email,
+                message
+            })
+        })
+        .then((response) => {
+            return response.json().then((data) => {
+                if (!response.ok) {
+                    throw new Error(data.error)
+                }
 
-        setname('')
-        setEmail('')
-        setMessage('')
+                return data
+            })
+        })
+        .then(() => {
+            setSuccess('Message Sent Successfully')
+            setName('')
+            setEmail('')
+            setMessage('')
+        })
+        .catch((err) => {
+            setError(err.message)
+        })
     }
+
     return (
         <form onSubmit = {handleSubmit}>
+
             {error && <p>{error}</p>}
             {success && <p>{success}</p>}
+
             <div>
                 <label>Name</label>
                 <input 
@@ -41,6 +70,7 @@ function ContactForm() {
                     onChange = {(e) => setName(e.target.value)}
                 />
             </div>
+
             <div>
                 <label>Email</label>
                 <input
@@ -49,6 +79,7 @@ function ContactForm() {
                     onChange = {(e) => setEmail(e.target.value)}
                 />
             </div>
+
             <div>
                 <label>Message</label>
                 <textarea
@@ -56,9 +87,11 @@ function ContactForm() {
                     onChange = {(e) => setMessage(e.target.value)}
                 ></textarea>
             </div>
+
             <button type = "submit">
                 Send Message
             </button>
+
         </form>
     )
 }

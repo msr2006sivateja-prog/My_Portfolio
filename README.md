@@ -50,3 +50,7 @@ To run the project locally:
 While working on this project, I learned how to create reusable React components, pass data through props, use React Router for navigation, manage state using `useState`, and handle side effects using `useEffect`.
 
 I also got a better understanding of how to organize a React project instead of keeping everything inside one file.
+
+## AI Assistance
+
+I used AI tools during the development of this project mainly for debugging errors, understanding error messages, and getting suggestions.
