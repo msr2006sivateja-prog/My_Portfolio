@@ -178,3 +178,6 @@ I also learned how the frontend and backend work together as separate parts of a
 ## AI Assistance
 
 I used AI tools during the development of this project mainly for debugging errors, understanding error messages, and getting suggestions while working on small parts of the application.
+
+## Screen Recording
+https://drive.google.com/file/d/1qoyqphpEM43UEpxW4f8pbhg0LxTRDaRB/view?usp=sharing
