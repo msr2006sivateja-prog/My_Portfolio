@@ -10,19 +10,25 @@ function ProjectDetail() {
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/projects/${projectId}`)
-            .then((response) => {
+            .then(async (response) => {
+                const data = await response.json()
+
                 if (!response.ok) {
-                    throw new Error('Project not found')
+                    if (response.status === 404) {
+                        throw new Error('Project not found')
+                    }
+
+                throw new Error('Unable to fetch project. Please try again later.')
                 }
 
-                return response.json()
+                return data
             })
             .then((data) => {
                 setProject(data)
                 setLoading(false)
             })
-            .catch(() => {
-                setError('Project not found')
+            .catch((err) => {
+                setError(err.message)
                 setLoading(false)
             })
     }, [projectId])
@@ -41,8 +47,7 @@ function ProjectDetail() {
         return (
             <main className="projects-page">
                 <section className="projects-section">
-                    <h1>Project Not Found</h1>
-                    <p>{error}</p>
+                    <h1>{error}</h1>
                     <Link to="/projects">
                         Back to Projects
                     </Link>
