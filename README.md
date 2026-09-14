@@ -167,38 +167,6 @@ http://localhost:5173
 
 Both the backend and frontend need to be running for the complete application to work.
 
-## API Testing
-
-The backend APIs can be tested using curl or Postman.
-
-### Check Backend
-
-curl http://localhost:5000/
-
-### Get All Projects
-
-curl http://localhost:5000/api/projects
-
-### Get One Project
-
-curl http://localhost:5000/api/projects/1
-
-### Invalid Project
-
-curl http://localhost:5000/api/projects/999
-
-### Submit Contact Form
-
-curl -X POST http://localhost:5000/api/contact -H "Content-Type: application/json" -d "{\"name\":\"Siva\",\"email\":\"siva@example.com\",\"message\":\"Hello\"}"
-
-### Get Contact Submissions
-
-curl http://localhost:5000/api/contact
-
-### Test Invalid Route
-
-curl http://localhost:5000/api/doesnotexist
-
 ## What I Learned
 
 While working on this project, I learned how to create reusable React components, pass data using props, use React Router, manage state using useState, and handle side effects using useEffect.
