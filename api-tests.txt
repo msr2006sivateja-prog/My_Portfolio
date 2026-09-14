@@ -1,0 +1,97 @@
+Backend API test commands : 
+URL = http://localhost:5000
+--------------------------------------------
+B1 : Check Server Status
+Request : 
+curl http://localhost:5000
+Expected Response : 
+{
+    "status": "ok"
+}
+Expected Status : 
+200
+---------------------------------------------
+B2 : Get All Projects
+Request : 
+curl http://localhoat:5000/api/projects
+Expected : 
+Returns the list of Projects
+Expected Status : 
+200
+-----------------------------------------------
+B3 : Get projects by ID
+Request : 
+curl http://localhoat:5000/api/projects/1
+Expected : 
+Returns the project with ID 1
+Request : 
+curl http://localhoat:5000/api/projects/99 (invalid)
+Expected Response : 
+{
+    "error": "Project not found"
+}
+Expected Status : 
+404
+---------------------------------------------------
+B4 : Submit Contact Form 
+
+Valid Request : 
+curl -X POST http://localhost:5000/api/contact -H "Content-Type: application/json" -d "{\"name\":\"username\",\"email\":\"user@gmail.com\", \"message\":\"Hello There!\"}"
+Expected : 
+The contact submitted is accepted and stored.
+Expected Status : 
+201
+
+Missing Name Request : 
+curl -X POST http://localhost:5000/api/contact -H "Content-Type: application/json" -d "{\"email\":\"user@gmail.com\", \"message\":\"Hello There!\"}"
+Expected Response : 
+{
+    "error": "Name is required"
+}
+Expected Status : 
+400
+
+Invalid email Request : 
+curl -X POST http://localhost:5000/api/contact -H "Content-Type: application/json" -d "{\"name\":\"username\",\"email\":\"gmail-com\", \"message\":\"Hello There!\"}"
+Expected Response : 
+{
+    "error": "Invalid email format"
+}
+Expected Status : 
+400
+------------------------------------------------
+B5 : Get Contact Submissions 
+Request : 
+curl http://localhost:5000/api/contact
+Expected : 
+Return all stored contact submissions.
+Expected Status : 
+200
+-------------------------------------------------
+B6 : Invalid Route 
+Request : 
+curl http://localhost:5000/api/random
+Expected Response : 
+{
+    "error": "Route not found"
+}
+Expected Status : 
+404
+
+Global Error Handler : 
+
+The Express application contains global error-handling middleware.
+Expected behavior:
+Server errors return JSON.
+HTTP status is 500.
+No HTML error page is returned.
+The server continues running after handling the error.
+--------------------------------------------------
+B7 : CORS and Environment Configuration
+The backend uses environment variables from the .env file.
+Variables:
+PORT=5000
+FRONTEND_URL=http://localhost:5173
+DATA_PATH=./data
+CORS is configured using FRONTEND_URL.
+
